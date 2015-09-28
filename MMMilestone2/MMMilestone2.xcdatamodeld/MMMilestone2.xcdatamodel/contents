@@ -1,4 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Contacto" representedClassName="MMMilestone2.Contacto" syncable="YES">
+        <attribute name="nombre" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="numero" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="chatsParticipante" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Conversacion" inverseName="usuarios" inverseEntity="Conversacion" syncable="YES"/>
+        <relationship name="chatsParticipanteGrupal" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ConversacionGrupal" inverseName="usuariosGrupal" inverseEntity="ConversacionGrupal" syncable="YES"/>
+    </entity>
+    <entity name="Conversacion" representedClassName="MMMilestone2.Conversacion" syncable="YES">
+        <attribute name="group" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="numeroAdmin" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="titulo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ultimoVisto" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="mensajesChat" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Mensaje" inverseName="salaChat" inverseEntity="Mensaje" syncable="YES"/>
+        <relationship name="usuarios" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contacto" inverseName="chatsParticipante" inverseEntity="Contacto" syncable="YES"/>
+    </entity>
+    <entity name="ConversacionGrupal" representedClassName="MMMilestone2.ConversacionGrupal" syncable="YES">
+        <attribute name="group" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="numeroAdmin" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="titulo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ultimoVisto" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="mensajesChatGrupal" optional="YES" toMany="YES" deletionRule="No Action" ordered="YES" destinationEntity="Mensaje" inverseName="salaChatGrupal" inverseEntity="Mensaje" syncable="YES"/>
+        <relationship name="usuariosGrupal" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Contacto" inverseName="chatsParticipanteGrupal" inverseEntity="Contacto" syncable="YES"/>
+    </entity>
+    <entity name="Mensaje" representedClassName="MMMilestone2.Mensaje" syncable="YES">
+        <attribute name="fecha" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="foto" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="idConversacion" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="idMensaje" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="mensaje" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sender" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="salaChat" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Conversacion" inverseName="mensajesChat" inverseEntity="Conversacion" syncable="YES"/>
+        <relationship name="salaChatGrupal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ConversacionGrupal" inverseName="mensajesChatGrupal" inverseEntity="ConversacionGrupal" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Contacto" positionX="0" positionY="45" width="128" height="105"/>
+        <element name="Conversacion" positionX="-36" positionY="9" width="128" height="150"/>
+        <element name="ConversacionGrupal" positionX="9" positionY="99" width="128" height="150"/>
+        <element name="Mensaje" positionX="27" positionY="72" width="128" height="165"/>
+    </elements>
 </model>
